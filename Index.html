@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Learn Vue.js</title>
+    <style>
+        button{
+            margin: 2px;
+            background-color: tomato;
+            border-radius: 3px;
+            color: #fff;
+        }
+        .box{
+            margin: 3px;           
+            height: 50px;
+            border: 4px solid wheat;
+            text-align: center;
+            line-height: 50px;            
+            color: blue;
+        }
+       body{
+            background: #eee;
+            max-width: 960px;
+            margin: 20px auto;
+       }
+       .part{            
+            margin-bottom:0 ;
+            color: green;
+            border: 1px solid goldenrod;
+            background-color: #fff;
+            border-radius: 2px;
+            text-align: center;
+            
+            
+       }
+        .subject {
+            margin: 10px;
+            text-align: center;
+            color: red
+        }
+        p,h3,ul{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style-type: non;
+            background:#fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor:pointer;
+        
+        }
+        li.fav{
+            background: #ff9ed2;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h2> Hello to Vue.js (:| </h2>
+    <h5 class="part">Part 1 - Basics </h5>
+    <div class="subject">--------------Definitions -------------------</div>
+
+    <div id="app">
+        
+        <div v-if="showBooks">
+            <p>{{title}} - {{author}} - {{age}} </p>
+
+        </div>
+        <button v-on:click="age++">Increase Age</button>
+        <button v-on:click="age--">Decrease Age</button>
+        <div @click="title='Something else' "> Change book title</div>
+        <div @click="changeTitle('New Book')"> Change book title</div>
+        <button @click="ToggleShowBooks()">
+            <span v-if="showBooks">Hide Book</span>
+            <span v-else>Show Book</span>
+        </button>
+        <div v-show="showBooks">Currently Showing Book ! </div>
+
+        <div class="subject">-------------- Mouse Events ----------------</div>
+        <div class="box" @mouseover="handleEvent">MouseOver (enter) {{mouseEventData}} </div>
+        <div class="box" @mouseleave="handleEvent">MouseLeav {{mouseEventData}}</div>
+        <div class="box" @dblclick="handleEvent">Double Click {{mouseEventData}} </div>
+        <div class="box" @mousemove="handlemousemove">Postion: {{xpos}},{{ypos}}</div>
+
+        <div class="subject">-------------- Outputting List ----------------</div>
+        <ul>
+            <li v-for="book in books">
+                <h3 style="margin:0 ;">{{book.title}} </h3>
+                <p style="margin: 0 ;"> {{book.author}} </p>
+                
+            </li>
+        </ul>
+
+        <div class="subject">-------------- Attribute Binding ' : ' ----------------</div>
+        <a v-bind:href="url">Best web site </a>  </br>    
+        <a :href="url">Best web site -same Previous </a>
+        <ul>
+            <li v-for="book in books">
+                <h3 style="margin:0 ;">{{book.title}} </h3>
+                <p style="margin: 0 ;"> {{book.author}} </p>
+                <img :src="book.img" :alt="book.title" width="50" height="50" style="margin:0;">
+            </li>
+        </ul>
+
+        <div class="subject">-------------- Dynamic Classes ----------------</div>
+        <ul>
+            <li v-for="book in books" :class="{fav:book.isFav}" @click="ToggleFav(book)">
+                <img :src="book.img" :alt="book.title" width="50" height="50" style="margin:0;">
+                <h3 >{{book.title}} </h3>
+                <p > {{book.author}} </p>
+            </li>
+        </ul>
+
+        <div class="subject">-------------- Computed Properties ----------------</div>
+        <ul>
+            <li v-for="book in filterBooks" :class="{fav:book.isFav}" @click="ToggleFav(book)">
+                <img :src="book.img" :alt="book.title" width="50" height="50" style="margin:0;">
+                <h3 >{{book.title}} </h3>
+                <p > {{book.author}} </p>
+            </li>
+        </ul>
+        <h5 class="part">Part 2 - The Vue CLI & Bigger Projects </h5>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
